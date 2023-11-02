@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    padding: 10px;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #260f78dc, #702d1e);
+}
+
+.to-do-app {
+    margin: 100px auto;
+    padding: 40px 30px 70px;
+    max-width: 700px;
+    background: #ffff;
+    border-radius: 10px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+.input-row {
+    margin-bottom: 20px;
+    padding-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #ececec;
+    border-radius: 20px;
+}
+
+input {
+    padding: 18px 10px;
+    width: 100%;
+    font-size: 14px;
+    border: none;
+    outline: none;
+    background: transparent;
+}
+
+button {
+    padding: 18px 40px;
+    font-size: 14px;
+    border: none;
+    border-radius: 20px;
+    background: rgb(255, 89, 69);
+    color: #fff;
+    cursor: pointer;
+}
+
+p {
+    margin-bottom: 10px;
+    padding: 14px;
+    font-size: 14px;
+}
+
+ul li {
+    position: relative;
+    margin-top: 14px;
+    margin-bottom: 14px;
+    margin-right: 8px;
+    padding-left: 50px;
+    font-size: 16px;
+    list-style: none;
+    display: flex;
+    justify-content: space-between;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 50%;
+    background-image: url(img/unchecked.png);
+    cursor: pointer;
+    background-size: cover;
+    background-position: center;
+    left: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+ul li.checked>span {
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
+    background-image: url(img/checked.png);
+}
+
+ul li span {
+    padding: 6px;
+    min-width: 450px;
+}
+
+.icon-container {
+    padding: 0 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+ul li i {
+    width: 25px;
+    height: 25px;
+    color: #555;
+    font-size: 16px;
+    text-align: center;
+    border-radius: 25%;
+    justify-content: space-between;
+}
+
+ul li .fa-solid {
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+ul li i:hover {
+    background: #edeef0;
+}
+
+@media (max-width: 768px) {
+    ul li span {
+        min-width: 50%;
+    }
+}
+
+@media (max-width: 480px) {
+    .input-row {
+        margin-bottom: 20px;
+        padding-left: 10px;
+        border-radius: 10px;
+    }
+
+    input {
+        padding: 16px 6px;
+        font-size: 14px;
+    }
+
+    button {
+        padding: 16px 20px;
+        font-size: 14px;
+        border-radius: 10px;
+    }
+
+    ul li {
+        padding-left: 40px;
+        font-size: 14px;
+        word-break: normal;
+    }
+
+    ul li::before {
+        height: 20px;
+        width: 20px;
+    }
+
+    ul li i {
+        width: 20px;
+        height: 20px;
+        font-size: 14px;
+    }
+
+    ul li .fa-solid {
+        padding: 12px;
+    }
+}
