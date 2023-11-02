@@ -13,8 +13,8 @@ The Task List Web App is a user-friendly task management application developed u
 - Reorder tasks using arrow icons.
 - Edit existing tasks.
 - Delete tasks.
-- Utilize local storage for persistent data.
-- Implement Responsive Web Design for various screen sizes.
+- Utilized local storage for persistent data.
+- Implemented Responsive Web Design for various screen sizes.
 
 ### *Prerequisites*:
 You'll need a web browser to run the application. Additionally, you will need an active Font Awesome Kit to deliver the icons used in the project. Copy your Kit's unique embed code into your HTML head tag.
