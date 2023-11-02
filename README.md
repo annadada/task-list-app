@@ -35,7 +35,7 @@ You'll need a web browser to run the application. Additionally, you will need an
 - Click the empty circle icon next to a task to mark it as completed.
 
 <p align="center">
-  <img src="./img/todo-list-2.png" width="400">
+  <img src="./img/todo-list-2.png" width="420">
 </p>
 
 ### *Acknowledgments*:
