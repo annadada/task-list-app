@@ -34,7 +34,9 @@ You'll need a web browser to run the application. Additionally, you will need an
 - Click the trash can icon to delete a task.
 - Click the empty circle icon next to a task to mark it as completed.
 
-![To-Do List Web App RWD](./img/todo-list-2.png)
+<p align="center">
+  <img src="./img/todo-list-2.png" width="400">
+</p>
 
 ### *Acknowledgments*:
 This project was inspired by various to-do list apps and tutorials. A significant source of inspiration and the most substantial contribution to this project came from the [GreatStack YouTube tutorial](https://www.youtube.com/watch?v=G0jO8kUrg-I&ab_channel=GreatStack).
