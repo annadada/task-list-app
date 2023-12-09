@@ -1,56 +1,63 @@
 // Get references to HTML elements
-const inputTextBox = document.getElementById("input-text-box");
-const listContainer = document.getElementById("list-container");
+const inputTextBox = document.querySelector("#input-text-box");
+const listContainer = document.querySelector("#list-container");
 const addButton = document.querySelector("button");
 const countValue = document.querySelector(".count-value");
-const pendingTasks = document.getElementById("pending-tasks");
+const pendingTasks = document.querySelector("#pending-tasks");
 
 // Initialize task counters
 let taskCount = 0;
 let checkedTaskCount = 0;
+
+// Function to create an icon element
+function createIcon(className) {
+    let icon = document.createElement("i");
+    icon.className = `fa-solid ${className}`;
+    return icon;
+}
+
+// Function to create an HTML element
+function createElement(tag, className) {
+    let element = document.createElement(tag);
+    if (className) {
+        element.className = className;
+    }
+    return element;
+}
+
+// Function to create a task element
+function createTaskElement(description) {
+    const listElement = createElement("li");
+
+    const textListElement = createElement("span");
+    textListElement.textContent = description;
+    listElement.appendChild(textListElement);
+
+    const iconContainer = createElement("div", "icon-container");
+    listElement.appendChild(iconContainer);
+
+    const arrowDownFaIcon = createIcon("fa-arrow-down");
+    const arrowUpFaIcon = createIcon("fa-arrow-up");
+    const editFaIcon = createIcon("fa-pen-to-square");
+    const deleteFaIcon = createIcon("fa-trash");
+
+    iconContainer.append(arrowDownFaIcon, arrowUpFaIcon, editFaIcon, deleteFaIcon);
+
+    arrowUpFaIcon.addEventListener("click", moveTaskUp);
+    arrowDownFaIcon.addEventListener("click", moveTaskDown);
+
+    return listElement;
+}
+
 
 // Function to add a new task
 function addTask() {
     if (inputTextBox.value === '') {
         alert("You must enter a task.");
     } else {
-        // Create a new list element
-        let listElement = document.createElement("li");
+        // Create a new task element
+        const listElement = createTaskElement(inputTextBox.value);
         listContainer.appendChild(listElement);
-
-        // Create a text element for the task description
-        let textListElement = document.createElement("span");
-        textListElement.textContent = inputTextBox.value;
-        listElement.appendChild(textListElement);
-
-        // Create an icon container
-        let iconContainer = document.createElement("div");
-        iconContainer.className = "icon-container";
-        listElement.appendChild(iconContainer);
-
-        // Create an arrow-down icon
-        let arrowDownFaIcon = document.createElement("i");
-        arrowDownFaIcon.className = "fa-solid fa-arrow-down";
-        iconContainer.appendChild(arrowDownFaIcon);
-
-        // Create an arrow-up icon
-        let arrowUpFaIcon = document.createElement("i");
-        arrowUpFaIcon.className = "fa-solid fa-arrow-up";
-        iconContainer.appendChild(arrowUpFaIcon);
-
-        // Create an edit button (icon)
-        let editFaIcon = document.createElement("i");
-        editFaIcon.className = "fa-solid fa-pen-to-square";
-        iconContainer.appendChild(editFaIcon);
-
-        // Create a delete button (icon)
-        let deleteFaIcon = document.createElement("i");
-        deleteFaIcon.className = "fa-solid fa-trash";
-        iconContainer.appendChild(deleteFaIcon);
-
-        // Add event listeners to arrow icons for task movement
-        arrowUpFaIcon.addEventListener("click", moveTaskUp);
-        arrowDownFaIcon.addEventListener("click", moveTaskDown);
 
         // Increment the task count and update the display
         taskCount++;
@@ -69,41 +76,48 @@ addButton.addEventListener("click", addTask);
 
 // Event listener for clicks on the task list container
 listContainer.addEventListener("click", function (event) {
-    const listItem = event.target.closest("li");
+    const target = event.target;
+    const listItem = target.closest("li");
     const textElement = listItem.querySelector("span");
 
-    if (event.target.classList.contains("fa-pen-to-square")) {
+    if (target.classList.contains("fa-pen-to-square")) {
         // Switch to edit mode
         listItem.classList.add("editing");
         textElement.contentEditable = true;
         textElement.focus();
-        event.target.classList.remove("fa-pen-to-square");
-        event.target.classList.add("fa-floppy-disk");
+        target.classList.remove("fa-pen-to-square");
+        target.classList.add("fa-floppy-disk");
         saveData();
-    } else if (event.target.classList.contains("fa-floppy-disk")) {
+    } else if (target.classList.contains("fa-floppy-disk")) {
         // Save changes
         listItem.classList.remove("editing");
         textElement.contentEditable = false;
-        event.target.classList.remove("fa-floppy-disk");
-        event.target.classList.add("fa-pen-to-square");
+        target.classList.remove("fa-floppy-disk");
+        target.classList.add("fa-pen-to-square");
         saveData();
-    } else if (event.target.classList.contains("fa-trash")) {
+    } else if (target.classList.contains("fa-trash")) {
         // Remove the task
         listItem.remove();
         taskCount--;
+
         if (listItem.classList.contains("checked")) {
             checkedTaskCount--;
         }
+
+        // Update the task count display and save data
         updateTaskCount();
         saveData();
-    } else if (event.target.tagName === "LI") {
+    } else if (target.tagName === "LI") {
         // Toggle task completion status
         listItem.classList.toggle("checked");
+
         if (listItem.classList.contains("checked")) {
             checkedTaskCount++;
         } else {
             checkedTaskCount--;
         }
+
+        // Update the task count display and save data
         updateTaskCount();
         saveData();
     }
@@ -171,9 +185,10 @@ function showTask() {
     }
 }
 
+// Call the function to load tasks and data on page load
 showTask();
 
-// Function to clear all tasks and local storage
+// Function to clear all tasks and local storage data
 function clearData() {
     localStorage.removeItem("appData");
     taskCount = 0;
